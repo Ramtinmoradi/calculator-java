@@ -1,14 +1,15 @@
 package UI;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class CreateFrame {
     JFrame frame;
     JTextField textField;
 
-    public CreateFrame(ActionListener listener, JTextField textField) {
-        this.textField = textField;
+    public CreateFrame(ActionListener listener) {
         createAndShowUI();
         setupAllButtons(listener);
         setFrameVisible();
@@ -17,6 +18,7 @@ public class CreateFrame {
     public void createAndShowUI() {
         frame = new JFrame("Calculator");
         frame.setSize(330, 496);
+        frame.getContentPane().setBackground(Color.DARK_GRAY);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setLayout(null);
@@ -36,8 +38,15 @@ public class CreateFrame {
     }
 
     public void showTextField() {
+        this.textField = new JTextField();
         textField.setBounds(16, 16, 280, 64);
+        textField.setEditable(false);
+        textField.setHorizontalAlignment(JTextField.RIGHT);
         frame.add(textField);
+    }
+
+    public JTextField getTextField() {
+        return this.textField;
     }
 
     public void createAndShowButtons(int rowItem, ActionListener listener, String... buttons) {
@@ -57,6 +66,9 @@ public class CreateFrame {
         JButton button = new JButton(title);
         button.addActionListener(listener);
         button.setBounds(leftPadding, topPadding, width, height);
+        button.setBackground(Color.LIGHT_GRAY);
+        button.setBorder(BorderFactory.createRaisedBevelBorder());
+        button.setOpaque(true);
         frame.add(button);
     }
 
